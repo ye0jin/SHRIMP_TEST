@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Move")]
     [SerializeField] private float speed;
+    private float lastXInput;
 
     [Header("Boost")]
     public float CurDashGauge;
@@ -47,7 +48,8 @@ public class PlayerController : MonoBehaviour
             float x = Input.GetAxisRaw("Horizontal") * speed;
             float y = Input.GetAxisRaw("Vertical") * speed;
 
-            sr.flipX = x > 0 ? true : false;
+            if (x != 0) lastXInput = x;
+            sr.flipX = lastXInput > 0 ? true : false;
 
             Vector2 move = new Vector2(x, y);
             rigid.velocity = move;
