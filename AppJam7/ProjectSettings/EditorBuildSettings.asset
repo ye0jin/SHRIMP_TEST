@@ -17,4 +17,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/00_Scene/Stage3.unity
     guid: cbddce2cbce6e09439e7813473bb4a18
+  - enabled: 1
+    path: Assets/00_Scene/HappyEnding.unity
+    guid: d85d7f8b459cf8b4ea356b441b521a26
+  - enabled: 1
+    path: Assets/00_Scene/DieEnding.unity
+    guid: cf489aca9b2308743a7feb52b8373dbe
   m_configObjects: {}

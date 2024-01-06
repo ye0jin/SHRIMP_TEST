@@ -112,7 +112,7 @@ public class UIManager : MonoBehaviour
 
     public void FadeIn(float value)
     {
-        fade.DOFade(value, 1f);
+        fade.DOFade(value, 1f).OnComplete(() => SetText(""));
     }
     public void SetText(string text)
     {

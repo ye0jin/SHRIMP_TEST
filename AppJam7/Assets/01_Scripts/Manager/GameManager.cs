@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -61,11 +62,11 @@ public class GameManager : MonoBehaviour
         {
             case 1:
                 curStage = 2;
-                StartCoroutine(DelayTime(2f, "Stage2"));
+                StartCoroutine(DelayTime(1f, "Stage2"));
                 break;
             case 2:
                 curStage = 3;
-                StartCoroutine(DelayTime(2f, "Stage3"));
+                StartCoroutine(DelayTime(1f, "Stage3"));
                 break;
             case 3:
                 Clear();
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
     private IEnumerator DelayTime(float time, string name)
     {
         yield return new WaitForSeconds(time);
+        DOTween.KillAll();
         SceneManager.LoadScene(name);
     }
 

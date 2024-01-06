@@ -14,16 +14,15 @@ public class DieEndingManager : MonoBehaviour
     [SerializeField] private GameObject poop;
     [SerializeField] private TextMeshProUGUI text;
 
-    private void Awake()
+    private void Start()
     {
+        fade.DOFade(0, 1);
+
         StartCoroutine(Co());
     }
 
     private IEnumerator Co()
     {
-        fade.DOFade(0, 1);
-        yield return new WaitForSeconds(1);
-
         SoundManager.Instance.PlayBadEnding();
 
         whaleAnim.SetTrigger("Poop");
@@ -45,8 +44,7 @@ public class DieEndingManager : MonoBehaviour
 
         yield return new WaitForSeconds(2.5f);
 
-        SceneManager.LoadScene("Menu");
-
+        fade.DOFade(1, 1f).OnComplete(() => SceneManager.LoadScene("Menu"));
 
         yield break;
     }

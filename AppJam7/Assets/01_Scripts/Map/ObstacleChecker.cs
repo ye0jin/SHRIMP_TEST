@@ -11,6 +11,7 @@ public class ObstacleChecker : MonoBehaviour
         Pain
     }
 
+    [SerializeField] private GameObject plasticEffect;
     [SerializeField] private CheckType checkType;
     private ObstacleParent parent;
 
@@ -23,6 +24,7 @@ public class ObstacleChecker : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+            Instantiate(plasticEffect, transform.position, Quaternion.identity);
 
             if (checkType == CheckType.Heal && player.IsDash)
             {
