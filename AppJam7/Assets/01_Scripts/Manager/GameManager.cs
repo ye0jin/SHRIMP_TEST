@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
     }
 
-    public void UpPainGauge(int value)
+    public void TakePain(int value)
     {
         if (painGauge + value < 100)
         {
@@ -35,6 +35,18 @@ public class GameManager : MonoBehaviour
         else
         {
             painGauge = 100;
+        }
+    }
+
+    public void TakeHeal(int value)
+    {
+        if (painGauge - value > 0)
+        {
+            painGauge -= value;
+        }
+        else
+        {
+            painGauge = 0;
         }
     }
 
