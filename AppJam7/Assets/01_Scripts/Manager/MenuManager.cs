@@ -22,6 +22,8 @@ public class MenuManager : MonoBehaviour
 
     public void StartGame()
     {
+        GameManager.curStage = 1;
+        GameManager.painGauge = 50;
         SceneManager.LoadScene("Stage1");
     }
 

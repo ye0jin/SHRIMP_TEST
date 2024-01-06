@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public static int curStage;
-    public static int painGauge;
+    public static int painGauge; // √÷¥Î 100
 
     public PlayerController player;
 
@@ -54,6 +54,11 @@ public class GameManager : MonoBehaviour
                 Clear();
                 break;
         }
+    }
+
+    public void GameOver()
+    {
+
     }
 
     public void Clear()
