@@ -22,6 +22,7 @@ public class Glass : MonoBehaviour
         }
 
         Destroy(gameObject);
+        SoundManager.Instance.PlayGlassBrokenSound();
 
         yield break;
     }

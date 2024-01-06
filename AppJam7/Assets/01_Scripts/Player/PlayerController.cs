@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour
         CurDashGauge = maxDashGauge;
     }
 
+    private void Start()
+    {
+    }
+
     private void Update()
     {
         Move();
@@ -48,21 +52,29 @@ public class PlayerController : MonoBehaviour
         Glass();
     }
 
-    private void Glass()
+    public void AddGlass(GameObject obj)
     {
-        Collider2D[] items = Physics2D.OverlapCircleAll(transform.position, 1.5f, 1 << LayerMask.NameToLayer("Glass"));
-        if (Input.GetKeyDown(KeyCode.Mouse1) && items.Length > 0 && !hasGlass)
+        //Collider2D[] items = Physics2D.OverlapCircleAll(transform.position, 1.5f, 1 << LayerMask.NameToLayer("Glass"));
+        //if (items.Length > 0 &&
+        if(!hasGlass)
         {
             hasGlass = true;
-            Destroy(items[0].gameObject);
+            Destroy(obj);
             glass.SetActive(true);
         }
 
-        if (Input.GetKeyDown(KeyCode.Mouse0) && hasGlass)
+    }
+
+    private void Glass()
+    {
+        if (Input.GetMouseButton(0) && hasGlass)
         {
             hasGlass = false;
             glass.SetActive(false);
+            
             GameObject g = Instantiate(glassPrefab, transform.position, Quaternion.identity);
+            Destroy(g.GetComponentInChildren<GlassCollider>().gameObject);
+
             Vector2 dir = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector2)transform.position).normalized;
             g.GetComponent<Rigidbody2D>().AddForce(dir.normalized * 8, ForceMode2D.Impulse);
         }
@@ -87,6 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && CurDashGauge - DashUse > 0 && !IsDash)
         {
+            SoundManager.Instance.PlayDashSound();
             IsDash = true;
             CurDashGauge -= DashUse;
             anim.SetTrigger("Dash");

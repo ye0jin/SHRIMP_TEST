@@ -14,8 +14,10 @@ public class SoundManager : MonoBehaviour
 
     [Header("BGM")]
     [Header("Player")]
+    [SerializeField] private AudioClip playerSwimSound;
+    [SerializeField] private AudioClip playerDashSound;
     [Header("Obstacle")]
-    public AudioClip glassSound;
+    [SerializeField] private AudioClip glassBrokenSound;
 
     private void Awake()
     {
@@ -51,9 +53,17 @@ public class SoundManager : MonoBehaviour
         PlayerPrefs.SetFloat(sfxKey, value);
     }
 
-    //SoundManager.Instance.PlayCardSelectSound(); <- 이런식으로 사용
-    public void PlayCardSelectSound()
+    //SoundManager.Instance.PlaySwimSound(); <- 이런식으로 사용
+    public void PlaySwimSound()
     {
-        audioSource.PlayOneShot(glassSound);
+        audioSource.PlayOneShot(playerSwimSound);
+    }
+    public void PlayDashSound()
+    {
+        audioSource.PlayOneShot(playerDashSound);
+    }
+    public void PlayGlassBrokenSound()
+    {
+        audioSource.PlayOneShot(glassBrokenSound);
     }
 }
