@@ -38,7 +38,7 @@ public class Parasite : MonoBehaviour
         if (collision.gameObject.CompareTag("GlassFragment"))
         {
             Instantiate(dieEffect, transform.position, Quaternion.identity);
-            GameManager.Instance.TakeHeal(5);
+            GameManager.Instance.TakeHeal(2);
             Destroy(gameObject);
         }
     }
