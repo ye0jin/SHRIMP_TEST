@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using UnityEngine;
 
 public class ObstacleParent : MonoBehaviour
 {
+    [SerializeField] private GameObject blood;
     [SerializeField] private bool isDown;
     [SerializeField] private float speed;
     [SerializeField] private int destroyCount;
@@ -32,10 +34,19 @@ public class ObstacleParent : MonoBehaviour
     {
         for (int i=0; i<100; i++)
         {
-            transform.Translate(transform.up * speed * Time.deltaTime);
-            yield return new WaitForSeconds(0.005f);
+            if (isDown)
+            {
+                transform.Translate(-transform.up * speed * Time.deltaTime);
+                yield return new WaitForSeconds(0.005f);
+            }
+            else
+            {
+                transform.Translate(transform.up * speed * Time.deltaTime);
+                yield return new WaitForSeconds(0.005f);
+            }
         }
 
+        Instantiate(blood, transform.position, Quaternion.identity);
         GameManager.Instance.TakePain(pain);
 
         yield break;
@@ -60,7 +71,7 @@ public class ObstacleParent : MonoBehaviour
         {
             for (int i = 0; i < 200; i++)
             {
-                transform.Translate(Vector2.up * speed * 2 * Time.deltaTime);
+                transform.Translate(transform.up * speed * 2 * Time.deltaTime);
                 sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, sr.color.a - 0.005f);
                 yield return new WaitForSeconds(0.005f);
             }
@@ -76,6 +87,8 @@ public class ObstacleParent : MonoBehaviour
         }
 
         GameManager.Instance.TakeHeal(heal);
+
+        Destroy(gameObject);
 
         yield break;
     }
