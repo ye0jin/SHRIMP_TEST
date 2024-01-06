@@ -56,6 +56,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void GameOver()
+    {
+
+    }
+
     public void Clear()
     {
         if (painGauge < 30)
