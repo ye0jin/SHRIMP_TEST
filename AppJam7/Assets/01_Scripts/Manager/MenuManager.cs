@@ -11,6 +11,10 @@ public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance;
 
+    [Header("")]
+    [SerializeField] private Transform background;
+    [SerializeField] private Transform fish;
+
     [Header("애니메이션")]
     [SerializeField] private Transform targetTrm;
     [SerializeField] private Transform animShrimp;
@@ -26,12 +30,25 @@ public class MenuManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        fadeImage.DOFade(0f, 1f);
     }
 
     private void Start()
     {
         fadeImage.color = Vector4.one;
-        fadeImage.DOFade(0f, 1f);
+        RandomBack();
+    }
+
+    public void RandomBack()
+    {
+        float randomY = Random.Range(-0.4f, 0.6f);
+        background.DOMoveY(randomY, 0.7f).SetEase(Ease.InOutSine);
+
+        float randomY2 = Random.Range(-0.7f, 0.7f);
+        fish.DOMoveY(randomY2, 0.7f).SetEase(Ease.InOutSine).OnComplete(() => {
+            DOTween.CompleteAll();
+            RandomBack();
+        });
     }
 
     public void RotateAnimation()
@@ -42,12 +59,15 @@ public class MenuManager : MonoBehaviour
             .SetLoops(-1, LoopType.Restart)
             .SetEase(Ease.Linear);
 
-        animShrimp.DOMoveX(targetTrm.position.x, 6f).OnComplete(() => StartGame());
-        RandomMoveY();
+        StartGame();
+        background.GetComponent<Animator>().SetTrigger("Mouth");
     }
 
     public void StartAnimation()
     {
+        DOTween.KillAll();
+
+        fish.transform.DOMoveX(-13f, 2f);
         animShrimp.transform.DOMoveX(0, 3f).OnComplete(() => RotateAnimation());
         RandomMoveY();
     }
@@ -61,7 +81,7 @@ public class MenuManager : MonoBehaviour
 
     private void StartGame()
     {
-        fadeImage.DOFade(1f,0.6f).OnComplete(() =>
+        fadeImage.DOFade(1f,2.2f).OnComplete(() =>
         {
             GameManager.curStage = 1;
             GameManager.painGauge = 50;
