@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public static int curStage;
     public static int painGauge;
 
+    public PlayerController player;
+
     private void Awake()
     {
         if (Instance == null)
@@ -20,6 +22,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        player = FindObjectOfType<PlayerController>();
     }
 
     public void UpPainGauge(int value)
