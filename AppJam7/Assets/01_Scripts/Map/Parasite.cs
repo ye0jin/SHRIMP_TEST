@@ -8,12 +8,14 @@ public class Parasite : MonoBehaviour
 {
     [SerializeField] private GameObject dieEffect;
     [SerializeField] private float speed;
-    [SerializeField] private float maxY;
-    [SerializeField] private float minY;
-    private bool isDown;
+    [SerializeField] private float waitTime;
+    [SerializeField] private float duration;
+    private Rigidbody2D rigid;
 
     private void Awake()
     {
+        rigid = GetComponent<Rigidbody2D>();
+
         StartCoroutine(Move());
     }
 
@@ -21,18 +23,13 @@ public class Parasite : MonoBehaviour
     {
         while (true)
         {
+            rigid.velocity = Vector3.zero;
+            yield return new WaitForSeconds(waitTime);
 
-            if (transform.position.y < maxY && !isDown)
-            {
-                transform.Translate(Vector2.up * speed * Time.deltaTime);
-                if (transform.position.y >= maxY) isDown = true;
-            }
-            else if (transform.position.y > minY && isDown)
-            {
-                transform.Translate(Vector2.down * speed * Time.deltaTime);
-                if (transform.position.y <= minY) isDown = false;
-            }
-            yield return null;
+            Vector2 movePos = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized;
+            rigid.AddForce(movePos * speed, ForceMode2D.Impulse);
+
+            yield return new WaitForSeconds(duration);
         }
     }
 

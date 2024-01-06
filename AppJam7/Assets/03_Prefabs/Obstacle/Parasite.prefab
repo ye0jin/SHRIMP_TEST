@@ -96,6 +96,7 @@ GameObject:
   - component: {fileID: 3346389421779616711}
   - component: {fileID: 3722357617226521153}
   - component: {fileID: 4972747876708474372}
+  - component: {fileID: -4992898280371227928}
   m_Layer: 0
   m_Name: Parasite
   m_TagString: Parasite
@@ -218,9 +219,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04077a7cd307a794585219c540a3c999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  maxY: 3
-  minY: -3
+  dieEffect: {fileID: 9121577397305081448, guid: cdbab0c0a7c0cbf4b9cc35bd97534b6b,
+    type: 3}
+  speed: 1
+  waitTime: 1
+  duration: 1
 --- !u!95 &4972747876708474372
 Animator:
   serializedVersion: 5
@@ -242,3 +245,30 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!50 &-4992898280371227928
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4852916769904783725}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
