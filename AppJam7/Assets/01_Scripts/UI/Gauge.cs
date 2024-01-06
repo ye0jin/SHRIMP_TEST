@@ -36,7 +36,7 @@ public class Gauge : MonoBehaviour
             yield return new WaitUntil(() => currentImageScaleY <= maxImageScaleY); // 대기
         }
 
-        currentImageScaleY += Time.deltaTime; // 현재 게이지에서 조금씩 증가
+        currentImageScaleY += Time.deltaTime * 0.1f; // 현재 게이지에서 조금씩 증가
         SetDashGauge(currentImageScaleY);
         yield return null;
 
@@ -53,7 +53,9 @@ public class Gauge : MonoBehaviour
             print("대쉬 불가 상태");
             return;
         }
-        SetDashGauge(currentImageScaleY - decreaseAmount);
+
+        currentImageScaleY -= decreaseAmount;
+        SetDashGauge(currentImageScaleY);
     }
 
     public void SetDashGauge(float amount)
