@@ -21,6 +21,7 @@ public class Parasite : MonoBehaviour
     {
         while (true)
         {
+
             if (transform.position.y < maxY && !isDown)
             {
                 transform.Translate(Vector2.up * speed * Time.deltaTime);
