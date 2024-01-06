@@ -21,11 +21,15 @@ public class PlayerController : MonoBehaviour
     private Transform cam;
 
     private Rigidbody2D rigid;
-
+    private Animator anim;
+    private SpriteRenderer sr;
+ 
     private void Awake()
     {
         cam = Camera.main.transform;
         rigid = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
         CurDashGauge = maxDashGauge;
     }
 
@@ -43,6 +47,8 @@ public class PlayerController : MonoBehaviour
             float x = Input.GetAxis("Horizontal") * speed;
             float y = Input.GetAxis("Vertical") * speed;
 
+            sr.flipX = x > 0 ? true : false;
+
             Vector2 move = new Vector2(x, y);
             rigid.velocity = move;
         }
@@ -54,6 +60,7 @@ public class PlayerController : MonoBehaviour
         {
             IsDash = true;
             CurDashGauge -= DashUse;
+            anim.SetTrigger("Dash");
             StartCoroutine(DashCoroutine());
         }
 
