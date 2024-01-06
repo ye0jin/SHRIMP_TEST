@@ -19,6 +19,9 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip playerDashSound;
     [Header("Obstacle")]
     [SerializeField] private AudioClip glassBrokenSound;
+    [Header("Ending")]
+    [SerializeField] private AudioClip happyEnding;
+    [SerializeField] private AudioClip badEnding;
 
     private void Awake()
     {
@@ -68,5 +71,15 @@ public class SoundManager : MonoBehaviour
     public void PlayGlassBrokenSound()
     {
         audioSource.PlayOneShot(glassBrokenSound);
+    }
+
+    public void PlayHappyEnding()
+    {
+        audioSource.PlayOneShot(happyEnding);
+    }
+
+    public void PlayBadEnding()
+    {
+        audioSource.PlayOneShot(badEnding);
     }
 }

@@ -88,13 +88,13 @@ public class GameManager : MonoBehaviour
 
     public void Clear()
     {
-        if (painGauge < 30)
+        if (painGauge < 20)
         {
-
+            SceneManager.LoadScene("HappyEnding");
         }
         else
         {
-
+            SceneManager.LoadScene("DieEnding");
         }
     }
 }
