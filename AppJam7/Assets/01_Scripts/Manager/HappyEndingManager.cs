@@ -15,6 +15,7 @@ public class HappyEndingManager : MonoBehaviour
 
     private IEnumerator Co()
     {
+        SoundManager.Instance.PlayHappyEnding();
         yield return new WaitForSeconds(2);
 
         while (text.color.a < 1)

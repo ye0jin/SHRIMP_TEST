@@ -24,6 +24,8 @@ public class DieEndingManager : MonoBehaviour
         fade.DOFade(0, 1);
         yield return new WaitForSeconds(1);
 
+        SoundManager.Instance.PlayBadEnding();
+
         whaleAnim.SetTrigger("Poop");
         yield return new WaitForSeconds(0.3f);
         GameObject g = Instantiate(poop, poopPos.position, Quaternion.identity);
