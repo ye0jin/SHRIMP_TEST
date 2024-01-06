@@ -8,15 +8,22 @@ public class Glass : MonoBehaviour
     [SerializeField] private int count;
     [SerializeField] private float rand;
 
-    private void Destroy()
+    private IEnumerator Broke()
     {
+        Animator anim = GetComponent<Animator>();
+
+        anim.SetTrigger("Broke");
+        yield return null;
+        yield return new WaitForSeconds(anim.GetNextAnimatorClipInfo(0).Length);
+
         for (int i=0; i<count; i++)
         {
-            Vector2 pos = (Vector2)transform.position + new Vector2(Random.Range(-rand, rand), Random.Range(-rand, rand));
-            Instantiate(glassFragment, pos, Quaternion.identity);
+            Instantiate(glassFragment, transform.position, Quaternion.identity);
         }
 
         Destroy(gameObject);
+
+        yield break;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -27,7 +34,7 @@ public class Glass : MonoBehaviour
 
             if (player.IsDash)
             {
-                Destroy();
+                StartCoroutine(Broke());
             }
         }
     }

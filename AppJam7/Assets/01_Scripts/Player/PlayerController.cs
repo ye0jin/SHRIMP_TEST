@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float cameraMoveSpeed;
     private Transform cam;
 
+    [Header("Glass")]
+    [SerializeField] private GameObject glass;
+    [SerializeField] private GameObject glassPrefab;
+    private bool hasGlass;
+
     private Rigidbody2D rigid;
     private Animator anim;
     private SpriteRenderer sr;
@@ -39,6 +44,28 @@ public class PlayerController : MonoBehaviour
         Move();
         Dash();
         CameraMove();
+
+        Glass();
+    }
+
+    private void Glass()
+    {
+        Collider2D[] items = Physics2D.OverlapCircleAll(transform.position, 1.5f, 1 << LayerMask.NameToLayer("Glass"));
+        if (Input.GetKeyDown(KeyCode.Mouse1) && items.Length > 0 && !hasGlass)
+        {
+            hasGlass = true;
+            Destroy(items[0].gameObject);
+            glass.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && hasGlass)
+        {
+            hasGlass = false;
+            glass.SetActive(false);
+            GameObject g = Instantiate(glassPrefab, transform.position, Quaternion.identity);
+            Vector2 dir = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - (Vector2)transform.position).normalized;
+            g.GetComponent<Rigidbody2D>().AddForce(dir.normalized * 8, ForceMode2D.Impulse);
+        }
     }
 
     private void Move()
@@ -98,6 +125,11 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Parasite"))
         {
             GameManager.Instance.GameOver();
+        }
+
+        if (collision.gameObject.CompareTag("Next"))
+        {
+            GameManager.Instance.NextStage();
         }
     }
 }
