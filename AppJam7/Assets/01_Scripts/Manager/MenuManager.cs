@@ -14,9 +14,10 @@ public class MenuManager : MonoBehaviour
     [Header("")]
     [SerializeField] private Transform background;
     [SerializeField] private Transform fish;
+    [SerializeField] private RectTransform title;
 
     [Header("애니메이션")]
-    [SerializeField] private Transform targetTrm;
+    [SerializeField] private RectTransform targetTrm;
     [SerializeField] private Transform animShrimp;
     [SerializeField] private Image fadeImage;
 
@@ -64,9 +65,22 @@ public class MenuManager : MonoBehaviour
     {
         DOTween.CompleteAll();
 
+        StartCoroutine(TitleMove());
+
         fish.transform.DOMoveX(-13f, 2f);
         animShrimp.transform.DOMoveX(0, 3f).OnComplete(() => RotateAnimation());
         RandomMoveY();
+    }
+
+    private IEnumerator TitleMove()
+    {
+        while (title.anchoredPosition.x > 0)
+        {
+            title.Translate(Vector2.left * 10 * Time.deltaTime);
+            yield return null;
+        }
+
+        yield break;
     }
 
     public void RandomMoveY()
