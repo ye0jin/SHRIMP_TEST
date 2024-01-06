@@ -1021,8 +1021,8 @@ RectTransform:
   m_GameObject: {fileID: 132115598}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
-  m_LocalScale: {x: 0.00926, y: 0.00926, z: 0.00926}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1617310924}
   - {fileID: 1365194614}
@@ -3861,7 +3861,7 @@ Transform:
   m_GameObject: {fileID: 569480453}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.6536909, y: 0.16818154, z: -0.6850088}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11352,6 +11352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58dac418c6c532a4e88ade4f7e1c4f8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BGM: {fileID: 8300000, guid: d58a3d16510f2604abf5cb6a432ad5d8, type: 3}
   playerSwimSound: {fileID: 8300000, guid: 2423d8c723e79a545bfae6ff893ca63a, type: 3}
   playerDashSound: {fileID: 8300000, guid: aac98e1bf02aa9149b689506dd1b82c2, type: 3}
   glassBrokenSound: {fileID: 8300000, guid: fc7a31b0cefbf9943b56525fd794ee7d, type: 3}
@@ -12401,8 +12402,8 @@ RectTransform:
   m_Children:
   - {fileID: 709530983}
   - {fileID: 1978137806}
-  - {fileID: 132115599}
   - {fileID: 830098131}
+  - {fileID: 132115599}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

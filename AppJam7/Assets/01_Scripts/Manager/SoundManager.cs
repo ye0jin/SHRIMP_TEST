@@ -13,6 +13,7 @@ public class SoundManager : MonoBehaviour
     private string sfxKey = "SFXVolume";
 
     [Header("BGM")]
+    [SerializeField] private AudioClip BGM;
     [Header("Player")]
     [SerializeField] private AudioClip playerSwimSound;
     [SerializeField] private AudioClip playerDashSound;
@@ -30,12 +31,14 @@ public class SoundManager : MonoBehaviour
 
         float bgmVolume = PlayerPrefs.GetFloat(bgmKey, 0.1f);
         float sfxVolume = PlayerPrefs.GetFloat(sfxKey, 0.4f);
+
         bgmAudioSource.volume = bgmVolume;
         audioSource.volume = sfxVolume;
     }
 
     private void Start()
     {
+        bgmAudioSource.clip = BGM;
         bgmAudioSource.Play();
         bgmAudioSource.loop = true;
     }
