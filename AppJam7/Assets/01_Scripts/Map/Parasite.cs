@@ -6,8 +6,8 @@ using UnityEngine;
 public class Parasite : MonoBehaviour
 {
     [SerializeField] private float speed;
-    [SerializeField] private float minY;
     [SerializeField] private float maxY;
+    [SerializeField] private float minY;
     private bool isDown;
 
     private void Awake()
