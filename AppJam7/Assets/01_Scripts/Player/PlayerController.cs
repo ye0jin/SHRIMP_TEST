@@ -8,50 +8,67 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed;
 
     [Header("Boost")]
-    public float CurBoostGauge;
-    [SerializeField] private float boostSpeed;
-    [SerializeField] private float maxBoostGauge;
-    [SerializeField] private float boostGaugeCharge;
-    [SerializeField] private float boostGaugeUse;
-    private float curBoostSpeed;
+    public float CurDashGauge;
+    public bool IsDash;
+    [SerializeField] private float dashForce;
+    [SerializeField] private float dashDuration;
+    [SerializeField] private float maxDashGauge;
+    [SerializeField] private float DashCharge;
+    [SerializeField] private float DashUse;
 
     private Rigidbody2D _rigid;
 
     private void Awake()
     {
         _rigid = GetComponent<Rigidbody2D>();
-        CurBoostGauge = maxBoostGauge;
+        CurDashGauge = maxDashGauge;
     }
 
     private void Update()
     {
         Move();
-        Boost();
+        Dash();
     }
 
     private void Move()
     {
-        float x = Input.GetAxis("Horizontal") * (speed + curBoostSpeed);
-        float y = Input.GetAxis("Vertical") * (speed + curBoostSpeed);
+        if (!IsDash)
+        {
+            float x = Input.GetAxis("Horizontal") * speed;
+            float y = Input.GetAxis("Vertical") * speed;
 
-        Vector2 move = new Vector2(x, y);
-        _rigid.velocity = move;
+            Vector2 move = new Vector2(x, y);
+            _rigid.velocity = move;
+        }
     }
 
-    private void Boost()
+    private void Dash()
     {
-        if (Input.GetKey(KeyCode.Space) && CurBoostGauge > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && CurDashGauge - DashUse > 0 && !IsDash)
         {
-            curBoostSpeed = boostSpeed;
-            CurBoostGauge -= Time.deltaTime * boostGaugeUse;
+            IsDash = true;
+            CurDashGauge -= DashUse;
+            StartCoroutine(DashCoroutine());
         }
-        else
+
+        if (CurDashGauge < maxDashGauge && !IsDash)
         {
-            curBoostSpeed = 0;
-            if (CurBoostGauge < maxBoostGauge)
-            {
-                CurBoostGauge += Time.deltaTime * boostGaugeCharge;
-            }
+            CurDashGauge += Time.deltaTime * DashUse;
         }
+    }
+
+    private IEnumerator DashCoroutine()
+    {
+        float x = Input.GetAxis("Horizontal");
+        float y = Input.GetAxis("Vertical");
+        Vector2 move = new Vector2(x, y);
+
+        _rigid.velocity = Vector2.zero;
+        _rigid.AddForce(move * dashForce, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(dashDuration);
+
+        IsDash = false;
+        yield break;
     }
 }
