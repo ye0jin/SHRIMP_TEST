@@ -129,7 +129,14 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Next"))
         {
-            GameManager.Instance.NextStage();
+            StartCoroutine(Next());
         }
+    }
+
+    private IEnumerator Next()
+    {
+        UIManager.instance.FadeIn(1);
+        yield return new WaitForSeconds(1);
+        GameManager.Instance.NextStage();
     }
 }
