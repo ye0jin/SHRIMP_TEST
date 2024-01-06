@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Parasite
   - GlassFragment
+  - Next
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - 
   - Ground Soft
   - Ground Hard
-  - 
+  - Glass
   - 
   - 
   - 
