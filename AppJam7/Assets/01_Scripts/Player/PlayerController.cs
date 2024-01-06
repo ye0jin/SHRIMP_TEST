@@ -44,8 +44,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!IsDash)
         {
-            float x = Input.GetAxis("Horizontal") * speed;
-            float y = Input.GetAxis("Vertical") * speed;
+            float x = Input.GetAxisRaw("Horizontal") * speed;
+            float y = Input.GetAxisRaw("Vertical") * speed;
 
             sr.flipX = x > 0 ? true : false;
 
