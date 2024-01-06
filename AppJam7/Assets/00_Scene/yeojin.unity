@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &383118909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,6 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ad5013457677c40bfc3162f5248b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gaugeFillSpeed: 0.05
   gaugeImage: {fileID: 1681092895}
 --- !u!1 &1681092894
 GameObject:
