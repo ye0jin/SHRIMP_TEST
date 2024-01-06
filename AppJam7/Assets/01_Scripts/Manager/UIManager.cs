@@ -20,6 +20,7 @@ public class UIManager : MonoBehaviour
     private string bgmKey = "BGMVolume";
     private string sfxKey = "SFXVolume";
 
+    [Header("")]
     [SerializeField] private Image fade;
     [SerializeField] private Image dashGauge;
     [SerializeField] private Image painGauge;
