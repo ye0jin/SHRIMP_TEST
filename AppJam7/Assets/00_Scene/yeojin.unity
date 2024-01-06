@@ -465,7 +465,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32ad5013457677c40bfc3162f5248b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayTime: 5
   gaugeImage: {fileID: 1681092895}
 --- !u!1 &1681092894
 GameObject:
