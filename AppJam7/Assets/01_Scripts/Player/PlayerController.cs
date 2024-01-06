@@ -8,8 +8,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed;
 
     [Header("Boost")]
+    public float CurBoostGauge;
     [SerializeField] private float boostSpeed;
-    [SerializeField] private KeyCode boostKey;
+    [SerializeField] private float maxBoostGauge;
+    [SerializeField] private float boostGaugeCharge;
+    [SerializeField] private float boostGaugeUse;
     private float curBoostSpeed;
 
     private Rigidbody2D _rigid;
@@ -17,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rigid = GetComponent<Rigidbody2D>();
+        CurBoostGauge = maxBoostGauge;
     }
 
     private void Update()
@@ -36,13 +40,18 @@ public class PlayerController : MonoBehaviour
 
     private void Boost()
     {
-        if (Input.GetKey(boostKey))
+        if (Input.GetKey(KeyCode.Space) && CurBoostGauge > 0)
         {
             curBoostSpeed = boostSpeed;
+            CurBoostGauge -= Time.deltaTime * boostGaugeUse;
         }
         else
         {
             curBoostSpeed = 0;
+            if (CurBoostGauge < maxBoostGauge)
+            {
+                CurBoostGauge += Time.deltaTime * boostGaugeCharge;
+            }
         }
     }
 }
