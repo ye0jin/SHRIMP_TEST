@@ -16,11 +16,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float DashCharge;
     [SerializeField] private float DashUse;
 
-    private Rigidbody2D _rigid;
+    [Header("Camera")]
+    [SerializeField] private float cameraMoveSpeed;
+    private Transform cam;
+
+    private Rigidbody2D rigid;
 
     private void Awake()
     {
-        _rigid = GetComponent<Rigidbody2D>();
+        cam = Camera.main.transform;
+        rigid = GetComponent<Rigidbody2D>();
         CurDashGauge = maxDashGauge;
     }
 
@@ -28,6 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         Dash();
+        CameraMove();
     }
 
     private void Move()
@@ -38,7 +44,7 @@ public class PlayerController : MonoBehaviour
             float y = Input.GetAxis("Vertical") * speed;
 
             Vector2 move = new Vector2(x, y);
-            _rigid.velocity = move;
+            rigid.velocity = move;
         }
     }
 
@@ -63,13 +69,19 @@ public class PlayerController : MonoBehaviour
         float y = Input.GetAxis("Vertical");
         Vector2 move = new Vector2(x, y);
 
-        _rigid.velocity = Vector2.zero;
-        _rigid.AddForce(move * dashForce, ForceMode2D.Impulse);
+        rigid.velocity = Vector2.zero;
+        rigid.AddForce(move * dashForce, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(dashDuration);
 
         IsDash = false;
         yield break;
+    }
+
+    private void CameraMove()
+    {
+        Vector3 pos = new Vector3(Vector2.Lerp(cam.transform.position, transform.position, Time.deltaTime * cameraMoveSpeed).x, Vector2.Lerp(cam.transform.position, transform.position, Time.deltaTime * cameraMoveSpeed).y, cam.position.z);
+        cam.position = pos;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
