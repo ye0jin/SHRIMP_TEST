@@ -1,7 +1,5 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
-using System.Security;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -22,7 +20,8 @@ public class UIManager : MonoBehaviour
     private string sfxKey = "SFXVolume";
 
     [Header("")]
-    [SerializeField] private Image fade;
+    [SerializeField] private CanvasGroup fade;
+    [SerializeField] private TextMeshProUGUI fadeText;
     [SerializeField] private Image dashGauge;
     [SerializeField] private Image painGauge;
 
@@ -43,6 +42,23 @@ public class UIManager : MonoBehaviour
 
         bgmSlider.value = bgmVolume;
         sfxSlider.value = sfxVolume;
+
+        int key = GameManager.curStage;
+        switch (key)
+        {
+            case 1:
+                SetText("스테이지 1");
+                break;
+            case 2:
+                SetText("스테이지 2");
+                break;
+            case 3:
+                SetText("스테이지 3");
+                break;
+            default:
+                SetText("");
+                break;
+        }
     }
 
     private void Update()
@@ -97,6 +113,10 @@ public class UIManager : MonoBehaviour
     public void FadeIn(float value)
     {
         fade.DOFade(value, 1f);
+    }
+    public void SetText(string text)
+    {
+        fadeText.text = text;
     }
 
     private void SetUI()
