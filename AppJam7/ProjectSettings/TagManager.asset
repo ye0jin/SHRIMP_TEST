@@ -60,3 +60,6 @@ TagManager:
   - name: Near Foreground
     uniqueID: 2727812175
     locked: 0
+  - name: Player
+    uniqueID: 4118928883
+    locked: 0
