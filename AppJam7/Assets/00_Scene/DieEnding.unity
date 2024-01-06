@@ -183,8 +183,7 @@ MonoBehaviour:
   m_text: "\uB625\uC774 \uB418\uC5C8\uC2B5\uB2C8\uB2E4..."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 217113729b0ac4e4eb4c6c22c9117d5b, type: 2}
-  m_sharedMaterial: {fileID: -7123291727478647662, guid: 217113729b0ac4e4eb4c6c22c9117d5b,
-    type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: f31be2e8f28a6be49a2370722f3e0cde, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

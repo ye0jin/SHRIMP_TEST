@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    public static int curStage;
+    public static int curStage = 1;
     public static int painGauge; // 최대 100
 
     public PlayerController player;
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
         }
 
         player = FindObjectOfType<PlayerController>();
+
+        print(curStage);
     }
 
     public void TakePain(int value)
@@ -52,15 +55,18 @@ public class GameManager : MonoBehaviour
 
     public void NextStage()
     {
+        UIManager.instance.SetText("");
+        UIManager.instance.FadeIn(1);
+
         switch (curStage)
         {
             case 1:
                 curStage = 2;
-                SceneManager.LoadScene("Stage2");
+                StartCoroutine(DelayTime(1f, "Stage2"));
                 break;
             case 2:
                 curStage = 3;
-                SceneManager.LoadScene("Stage3");
+                StartCoroutine(DelayTime(1f, "Stage3"));
                 break;
             case 3:
                 Clear();
@@ -70,7 +76,16 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        UIManager.instance.FadeIn(1);
+        UIManager.instance.SetText("게임오버");
+        StartCoroutine(DelayTime(2f, SceneManager.GetActiveScene().name));
+    }
+
+    private IEnumerator DelayTime(float time, string name)
+    {
+        yield return new WaitForSeconds(time);
+        DOTween.KillAll();
+        SceneManager.LoadScene(name);
     }
 
     public void Clear()

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Glass : MonoBehaviour
 {
     [SerializeField] private GameObject glassFragment;
+    [SerializeField] private GameObject glassParticle;
     [SerializeField] private int count;
     [SerializeField] private float rand;
 
@@ -23,6 +24,8 @@ public class Glass : MonoBehaviour
 
         Destroy(gameObject);
         SoundManager.Instance.PlayGlassBrokenSound();
+
+        Instantiate(glassParticle, transform.position, Quaternion.identity);
 
         yield break;
     }

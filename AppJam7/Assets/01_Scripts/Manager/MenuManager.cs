@@ -47,15 +47,12 @@ public class MenuManager : MonoBehaviour
 
         float randomY2 = Random.Range(-0.7f, 0.7f);
         fish.DOMoveY(randomY2, 0.7f).SetEase(Ease.InOutSine).OnComplete(() => {
-            DOTween.CompleteAll();
             RandomBack();
         });
     }
 
     public void RotateAnimation()
     {
-        DOTween.KillAll();
-
         animShrimp.DORotate(new Vector3(0f, 0f, 360f), 0.6f, RotateMode.FastBeyond360)
             .SetLoops(-1, LoopType.Restart)
             .SetEase(Ease.Linear);
@@ -66,7 +63,7 @@ public class MenuManager : MonoBehaviour
 
     public void StartAnimation()
     {
-        DOTween.KillAll();
+        DOTween.CompleteAll();
 
         StartCoroutine(TitleMove());
 

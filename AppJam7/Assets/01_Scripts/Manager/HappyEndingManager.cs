@@ -1,14 +1,21 @@
 using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class HappyEndingManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] private Image image;
 
     private void Awake()
+    {
+        image.DOFade(0, 1f);
+    }
+
+    private void Start()
     {
         StartCoroutine(Co());
     }
@@ -27,7 +34,7 @@ public class HappyEndingManager : MonoBehaviour
 
         yield return new WaitForSeconds(2);
 
-        SceneManager.LoadScene("Menu");
+        image.DOFade(1, 1f).OnComplete(() => SceneManager.LoadScene("Menu"));
 
         yield break;
     }

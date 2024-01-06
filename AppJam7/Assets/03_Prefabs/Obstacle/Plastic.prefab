@@ -197,6 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594dc021e5139fe4b98cb29ec34d1db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plasticEffect: {fileID: 9121577397305081448, guid: b7911be537bbb4541a01e46b26fb5b0b,
+    type: 3}
   checkType: 0
 --- !u!1 &4804034485107710439
 GameObject:
@@ -370,6 +372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594dc021e5139fe4b98cb29ec34d1db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plasticEffect: {fileID: 9121577397305081448, guid: b7911be537bbb4541a01e46b26fb5b0b,
+    type: 3}
   checkType: 0
 --- !u!1 &7380536966948827137
 GameObject:
@@ -461,4 +465,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594dc021e5139fe4b98cb29ec34d1db2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plasticEffect: {fileID: 9121577397305081448, guid: b7911be537bbb4541a01e46b26fb5b0b,
+    type: 3}
   checkType: 1

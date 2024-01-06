@@ -172,6 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   glassFragment: {fileID: 6068611360281169118, guid: 6f3fdea364e63a2459a687168639c1f7,
     type: 3}
+  glassParticle: {fileID: 9121577397305081448, guid: cdbab0c0a7c0cbf4b9cc35bd97534b6b,
+    type: 3}
   count: 1
   rand: 1
 --- !u!1 &2034130039408510583
