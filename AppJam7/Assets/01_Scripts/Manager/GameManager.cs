@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+
+    public static int curStage;
+    public static int painGauge;
 
     private void Awake()
     {
@@ -18,5 +22,45 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void UpPainGauge(int value)
+    {
+        if (painGauge + value < 100)
+        {
+            painGauge += value;
+        }
+        else
+        {
+            painGauge = 100;
+        }
+    }
 
+    public void NextStage()
+    {
+        switch (curStage)
+        {
+            case 1:
+                curStage = 2;
+                SceneManager.LoadScene("Stage2");
+                break;
+            case 2:
+                curStage = 3;
+                SceneManager.LoadScene("Stage3");
+                break;
+            case 3:
+                Clear();
+                break;
+        }
+    }
+
+    public void Clear()
+    {
+        if (painGauge < 30)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
 }
