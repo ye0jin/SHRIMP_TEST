@@ -30,7 +30,8 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        fadeImage.color = Vector4.zero; // √ ±‚»≠
+        fadeImage.color = Vector4.one;
+        fadeImage.DOFade(0f, 1f);
     }
 
     public void RotateAnimation()

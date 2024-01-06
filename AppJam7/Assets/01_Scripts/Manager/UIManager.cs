@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -34,9 +35,8 @@ public class UIManager : MonoBehaviour
     {
         FadeIn(0);
 
-
         isSetting = false;
-        settingPanel.gameObject.SetActive(false);
+        settingPanel.transform.localPosition = new Vector3(0, 1000f, 0);
 
         float bgmVolume = PlayerPrefs.GetFloat(bgmKey);
         float sfxVolume = PlayerPrefs.GetFloat(sfxKey);
@@ -57,17 +57,25 @@ public class UIManager : MonoBehaviour
         {
             if (isSetting)
             {
-                Time.timeScale = 1;
-                isSetting = false;
-                settingPanel.gameObject.SetActive(false);
+                Off();
             }
             else
             {
-                Time.timeScale = 0;
-                isSetting = true;
-                settingPanel.gameObject.SetActive(true);
+                On();
             }
         }
+    }
+
+    public void Off()
+    {
+        Time.timeScale = 1;
+        settingPanel.transform.DOLocalMoveY(1000f, 0.6f);
+        isSetting = false;
+    }
+    public void On()
+    {
+        settingPanel.transform.DOLocalMoveY(0f,0.8f).OnComplete(() => Time.timeScale = 0);
+        isSetting = true;
     }
 
     public void BGMSliderChangedVolume()
@@ -102,5 +110,11 @@ public class UIManager : MonoBehaviour
         {
             painGauge.fillAmount = GameManager.painGauge / 100f;
         }
+    }
+
+    public void OnClickTitleButton()
+    {
+        Off();
+        fade.DOFade(1, 1f).OnComplete(() => SceneManager.LoadScene(0));
     }
 }
