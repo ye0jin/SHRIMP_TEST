@@ -1,10 +1,12 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Parasite : MonoBehaviour
 {
+    [SerializeField] private GameObject dieEffect;
     [SerializeField] private float speed;
     [SerializeField] private float maxY;
     [SerializeField] private float minY;
@@ -30,6 +32,16 @@ public class Parasite : MonoBehaviour
                 if (transform.position.y <= minY) isDown = false;
             }
             yield return null;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("GlassFragment"))
+        {
+            Instantiate(dieEffect, transform.position, Quaternion.identity);
+            GameManager.Instance.TakeHeal(5);
+            Destroy(gameObject);
         }
     }
 }
