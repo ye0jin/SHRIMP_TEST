@@ -71,4 +71,12 @@ public class PlayerController : MonoBehaviour
         IsDash = false;
         yield break;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Parasite"))
+        {
+            GameManager.Instance.GameOver();
+        }
+    }
 }
